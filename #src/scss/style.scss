@@ -1,0 +1,187 @@
+@mixin font($font_name, $file_name, $weight, $style) {
+	@font-face {
+		font-family: $font_name;
+		font-display: swap;
+		src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+		font-weight: #{$weight};
+		font-style: #{$style};
+	}
+}
+
+//? &display=swap&subset=cyrillic-ext окончаник для Google Fonts
+
+@import "fonts";
+
+$fontFamily : 'Roboto', sans-serif; //! Шрифт по умолчанию в body
+
+@import 'modern-reset';
+@import "vars";
+
+body{
+	font-family: $fontFamily;
+	font-size: 16px;
+	line-height: 1.19;
+	color: $main-light;
+	background-color: $main-dark;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+	clip: rect(0 0 0 0)
+}
+
+#space {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: transparent;
+	z-index: -10;
+}
+
+.snow {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	display: block;
+	z-index: 10;
+
+	// &--fixed{
+	// 	position: fixed;
+	// }
+}
+
+.page-wrapper {
+	overflow: hidden;
+	position: relative;
+}
+
+.section{
+	position: relative;
+
+	@media (min-width: 992px){
+		height: 100vh;
+	}
+
+	&.swiper-slide{
+		height: 100%;
+	}
+}
+.main{
+	// height: 100vh;
+
+	&.swiper-wrapper{
+		height: 100vh;
+	}
+}
+
+.container {
+	max-width: 1375px;
+	padding: 0 15px;
+	margin: 0 auto;
+	position: relative;
+	z-index: 20;
+}
+
+.title {
+	@extend %risque;
+	font-size: 52px;
+	line-height: inherit;
+
+	@media (min-width: 768px){
+		font-size: 72px;
+	}
+}
+
+.subtitle {
+	@extend %risque;
+	font-size: 28px;
+
+	@media (min-width: 768px){
+		font-size: 38px;
+	}
+}
+
+.heading{
+	@extend %risque;
+	font-size: 52px;
+
+	@media (min-width: 768px){
+		font-size: 56px;
+	}
+}
+
+.btn{
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	height: 45px;
+	min-width: 185px;
+	text-decoration: none;
+	font-size: 16px;
+	color: inherit;
+	border: 2px solid;
+	border-radius: 20px 20px 20px 0px;
+	transition: all .15s;
+
+	@media (min-width: 992px){
+		&:hover{
+			background-color: $main-light;
+			color: $main-dark;
+		}
+	}
+}
+
+.overflow{
+	overflow: hidden;
+}
+
+.snowflake{
+	display: none;
+	@media (min-width: 992px){
+		display: block;
+		width: 450px;
+		height: 450px;
+		background: url(../images/snowflake.png) no-repeat center;
+		position: absolute;
+		// transform: rotate(-10.4deg);
+		left: -190px;
+		top: calc(100% - 450px);
+		z-index: 1;
+		transition: all 5s;
+		animation-name: snowflake-rotate;
+		animation-duration: 40s;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+
+		&--fly{
+			top: calc(100vh - 120px);
+		}
+	}
+	
+}
+
+@keyframes snowflake-rotate{
+	0%{
+		transform: rotate(0);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
+
+@import "burger";
+@import "header";
+@import "main-section";
+@import "presents";
+@import "letter";
